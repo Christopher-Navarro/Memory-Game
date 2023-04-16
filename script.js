@@ -5,6 +5,12 @@ let flipped = 0;
 let notClicked = false;
 let score = 0;
 let lowScore = localStorage.getItem("low-score");
+const startButton = document.getElementById('start');
+const content = document.getElementById('content');
+
+startButton.addEventListener('click', () => {
+  content.style.display = 'block';
+});
 
 
 const COLORS = [
@@ -67,7 +73,8 @@ function createDivsForColors(colorArray) {
     gameContainer.append(newDiv);
   }
 }
-
+const moveElement = document.getElementById("moves");
+moveElement.innerText = lowScore;
 const scoreElement = document.getElementById("score");
 
   // TODO: Implement this function!
@@ -114,10 +121,10 @@ function handleCardClick(event) {
     }
   }
 
-  let lowScore = +localStorage.getItem("low-score") || Infinity;
-  if (score > lowScore) {
-    localStorage.setItem("low-score", score);
-  }
+if (score < lowScore || Infinity){
+localStorage.setItem("low-score", score);
+};
+  
 
 
   if (flipped === COLORS.length) alert("GAME OVER!");
